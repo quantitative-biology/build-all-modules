@@ -5,15 +5,15 @@ A repository for building the document for our five modules. To build it you nee
 
 This is a simplified version (just what is need to build the document) of https://github.com/quantitative-biology/Advanced_Quant_Bio.github.io . But this one does not yet show the rendered html version.
 
-Then:
+To build:
 
-In RStudio, click the render button (not the knitr) button (**Andy thinks - can someomone confirm).
-
-In R,
+In R, from the `build-all-modules/` directory:
  
 ```
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 ```
+
+In RStudio, click the render button (not the knitr) button, but you may need to make sure you're in the right place (**Andy thinks - can someomone confirm).
 
 If you get errors such as it not finding an `.Rmd` file, then make sure you've updated (`git fetch` and `git rebase`) for each separate repository called `module-X-...`. 
 
