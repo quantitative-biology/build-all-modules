@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Multivariate distance and cluster analysis | Quant Bio Modules</title>
+  <meta name="description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Multivariate distance and cluster analysis | Quant Bio Modules" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Multivariate distance and cluster analysis | Quant Bio Modules" />
+  
+  <meta name="twitter:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  
+
+<meta name="author" content="Kim Cuddington, Andrew Edwards, Brian Ingalls" />
+
+
+<meta name="date" content="2021-11-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-multivariate-analysis.html"/>
+<link rel="next" href="ordination.html"/>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html"><i class="fa fa-check"></i><b>2</b> Introduction to Git and GitHub</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-are-git-and-github-and-how-might-they-be-useful"><i class="fa fa-check"></i><b>2.1</b> What are Git and GitHub and how might they be useful?</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#you-just-want-do-download-someone-elses-code-from-their-github-repository"><i class="fa fa-check"></i><b>2.2</b> You just want do download someone else’s code from their GitHub repository</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#motivation-for-learning-more"><i class="fa fa-check"></i><b>2.3</b> Motivation for learning more</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-application-pacific-hake-stock-assessment"><i class="fa fa-check"></i><b>2.3.1</b> Example application – Pacific Hake stock assessment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#examples-of-what-we-can-avoid"><i class="fa fa-check"></i><b>2.3.2</b> Examples of what we can avoid</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-of-advantages-that-arise-from-using-github"><i class="fa fa-check"></i><b>2.3.3</b> Example of advantages that arise from using GitHub</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#why-this-course"><i class="fa fa-check"></i><b>2.3.4</b> Why this course?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#does-it-matter-which-computer-language-my-code-is-in"><i class="fa fa-check"></i><b>2.3.5</b> Does it matter which computer language my code is in?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#getting-set-up-for-the-first-time"><i class="fa fa-check"></i><b>2.4</b> Getting set up for the first time</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-you-will-end-up-having-installed"><i class="fa fa-check"></i><b>2.4.1</b> What you will end up having installed</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#text-editor"><i class="fa fa-check"></i><b>2.4.2</b> Text Editor</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-the-git-application-on-your-machine"><i class="fa fa-check"></i><b>2.4.3</b> Install the Git application on your machine</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell"><i class="fa fa-check"></i><b>2.4.4</b> Git shell</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell-rstudio"><i class="fa fa-check"></i><b>2.4.5</b> Git shell, RStudio</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#powershell-and-posh-git"><i class="fa fa-check"></i><b>2.4.6</b> Powershell and posh-git</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#one-time-authentication"><i class="fa fa-check"></i><b>2.4.7</b> One-time authentication</a></li>
+<li class="chapter" data-level="2.4.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#configure-the-git-application"><i class="fa fa-check"></i><b>2.4.8</b> Configure the Git application</a></li>
+<li class="chapter" data-level="2.4.9" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-a-difftool-optional"><i class="fa fa-check"></i><b>2.4.9</b> Install a difftool (optional)</a></li>
+<li class="chapter" data-level="2.4.10" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#save-our-template-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.10</b> Save our template <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.11" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#edit-the-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.11</b> Edit the <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.12" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#mac-only-make-your-output-pretty"><i class="fa fa-check"></i><b>2.4.12</b> MAC only: make your output pretty</a></li>
+<li class="chapter" data-level="2.4.13" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#navigating-in-a-shell"><i class="fa fa-check"></i><b>2.4.13</b> Navigating in a shell</a></li>
+<li class="chapter" data-level="2.4.14" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#something-to-view-markdown-files-optional"><i class="fa fa-check"></i><b>2.4.14</b> Something to view Markdown files (optional)</a></li>
+<li class="chapter" data-level="2.4.15" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#bonus-keyboard-shortcut"><i class="fa fa-check"></i><b>2.4.15</b> Bonus keyboard shortcut</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-share-your-own-code"><i class="fa fa-check"></i><b>2.5</b> Using Git and GitHub to share your own code</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#definitions"><i class="fa fa-check"></i><b>2.5.1</b> Definitions</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#creating-a-new-repository"><i class="fa fa-check"></i><b>2.5.2</b> Creating a new repository</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#cloning-your-new-repository"><i class="fa fa-check"></i><b>2.5.3</b> Cloning your new repository</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#committing"><i class="fa fa-check"></i><b>2.5.4</b> Committing</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-1-create-edit-and-commit-simpletext.txt"><i class="fa fa-check"></i><b>2.5.5</b> Exercise 1: create, edit and commit <em>simpleText.txt</em></a></li>
+<li class="chapter" data-level="2.5.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-2-multiple-files"><i class="fa fa-check"></i><b>2.5.6</b> Exercise 2: multiple files</a></li>
+<li class="chapter" data-level="2.5.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-to-write-in-commit-messages"><i class="fa fa-check"></i><b>2.5.7</b> What to write in commit messages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-collaborate-with-colleagues"><i class="fa fa-check"></i><b>2.6</b> Using Git and GitHub to collaborate with colleagues</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#demonstration-of-collaborating"><i class="fa fa-check"></i><b>2.6.1</b> Demonstration of collaborating</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#a-bit-more-about-git-rebase"><i class="fa fa-check"></i><b>2.6.2</b> A bit more about git rebase</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#fixing-a-conflict"><i class="fa fa-check"></i><b>2.6.3</b> Fixing a conflict</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-3-collaborating-on-a-single-repository"><i class="fa fa-check"></i><b>2.6.4</b> Exercise 3: collaborating on a single repository</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#collaborating-summary"><i class="fa fa-check"></i><b>2.6.5</b> Collaborating summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#workflow-tips-when-collaborating"><i class="fa fa-check"></i><b>2.7</b> Workflow tips when collaborating</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#beyond-the-basics-of-git-and-github-getting-more-advanced"><i class="fa fa-check"></i><b>2.8</b> Beyond the basics of Git and GitHub – getting more advanced</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-ive-made-some-changes-but-dont-really-want-to-keep-them-git-stash"><i class="fa fa-check"></i><b>2.8.1</b> So I’ve made some changes but don’t really want to keep them – git stash</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#the-power-to-go-back"><i class="fa fa-check"></i><b>2.8.2</b> The power to go back</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-how-does-git-do-all-this"><i class="fa fa-check"></i><b>2.8.3</b> So how does Git do all this?</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-terminology"><i class="fa fa-check"></i><b>2.8.4</b> Git terminology</a></li>
+<li class="chapter" data-level="2.8.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#branching"><i class="fa fa-check"></i><b>2.8.5</b> Branching</a></li>
+<li class="chapter" data-level="2.8.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#pull-requests"><i class="fa fa-check"></i><b>2.8.6</b> Pull requests</a></li>
+<li class="chapter" data-level="2.8.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#undoing-stuff"><i class="fa fa-check"></i><b>2.8.7</b> Undoing stuff</a></li>
+<li class="chapter" data-level="2.8.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-r-and-github-within-rstudio"><i class="fa fa-check"></i><b>2.8.8</b> Using R and GitHub within RStudio</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Markdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#basic-idea"><i class="fa fa-check"></i><b>3.2</b> Basic idea</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#simple-example"><i class="fa fa-check"></i><b>3.3</b> Simple example</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#exercise"><i class="fa fa-check"></i><b>3.3.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#output-format"><i class="fa fa-check"></i><b>3.4</b> Output format</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#further-reading"><i class="fa fa-check"></i><b>3.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-multivariate-analysis.html"><a href="introduction-to-multivariate-analysis.html"><i class="fa fa-check"></i><b>4</b> Introduction to multivariate analysis</a></li>
+<li class="chapter" data-level="5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html"><i class="fa fa-check"></i><b>5</b> Multivariate distance and cluster analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#thinking-about-resemblence"><i class="fa fa-check"></i><b>5.1</b> Thinking about resemblence</a></li>
+<li class="chapter" data-level="5.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#binary-similarity-metrics"><i class="fa fa-check"></i><b>5.2</b> Binary Similarity metrics</a></li>
+<li class="chapter" data-level="5.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#quantitative-similarity-dissimilarity-metrics"><i class="fa fa-check"></i><b>5.3</b> Quantitative similarity &amp; dissimilarity metrics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#euclidean-distance"><i class="fa fa-check"></i><b>5.3.1</b> Euclidean Distance</a></li>
+<li class="chapter" data-level="5.3.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#comparing-more-than-two-communitiessamplessitesgenesspecies"><i class="fa fa-check"></i><b>5.3.2</b> Comparing more than two communities/samples/sites/genes/species</a></li>
+<li class="chapter" data-level="5.3.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions"><i class="fa fa-check"></i><b>5.3.3</b> R functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Cluster Analysis</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#hierarchical-clustering-groups-are-nested-within-other-groups."><i class="fa fa-check"></i><b>5.4.1</b> Hierarchical clustering: groups are nested within other groups.</a></li>
+<li class="chapter" data-level="5.4.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions-1"><i class="fa fa-check"></i><b>5.4.2</b> R functions</a></li>
+<li class="chapter" data-level="5.4.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#how-many-clusters"><i class="fa fa-check"></i><b>5.4.3</b> How many clusters</a></li>
+<li class="chapter" data-level="5.4.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#k-means-clustering"><i class="fa fa-check"></i><b>5.4.4</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="5.4.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#fuzzy-c-means-clustering"><i class="fa fa-check"></i><b>5.4.5</b> Fuzzy C-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#exercise-cluster-analysis-of-isotope-data"><i class="fa fa-check"></i><b>5.5</b> Exercise: Cluster analysis of isotope data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ordination.html"><a href="ordination.html"><i class="fa fa-check"></i><b>6</b> Ordination</a><ul>
+<li class="chapter" data-level="6.1" data-path="ordination.html"><a href="ordination.html#ordination-as-data-reduction"><i class="fa fa-check"></i><b>6.1</b> Ordination as data reduction</a></li>
+<li class="chapter" data-level="6.2" data-path="ordination.html"><a href="ordination.html#methods-of-ordination"><i class="fa fa-check"></i><b>6.2</b> Methods of Ordination</a></li>
+<li class="chapter" data-level="6.3" data-path="ordination.html"><a href="ordination.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>6.3</b> Principal Components Analysis (PCA)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>7</b> Machine learning</a><ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning.html"><a href="machine-learning.html#classification"><i class="fa fa-check"></i><b>7.1</b> Classification</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning.html"><a href="machine-learning.html#logistic-regression-as-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.1</b> Logistic regression as a binary classifier</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning.html"><a href="machine-learning.html#interpreting-the-logistic-regression"><i class="fa fa-check"></i><b>7.1.2</b> Interpreting the logistic regression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning.html"><a href="machine-learning.html#measuring-the-performance-of-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.3</b> Measuring the performance of a binary classifier</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning.html"><a href="machine-learning.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>7.1.4</b> Multiple logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning.html"><a href="machine-learning.html#cross-validation"><i class="fa fa-check"></i><b>7.2</b> Cross-validation</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning.html"><a href="machine-learning.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>7.2.1</b> k-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="machine-learning.html"><a href="machine-learning.html#tree-based-methods-for-classification"><i class="fa fa-check"></i><b>7.3</b> Tree-based methods for classification</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="machine-learning.html"><a href="machine-learning.html#classification-and-regression-trees-carts"><i class="fa fa-check"></i><b>7.3.1</b> Classification and regression trees (CARTs)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="machine-learning.html"><a href="machine-learning.html#tree-pruning"><i class="fa fa-check"></i><b>7.3.2</b> Tree pruning</a></li>
+<li class="chapter" data-level="7.3.3" data-path="machine-learning.html"><a href="machine-learning.html#random-forests"><i class="fa fa-check"></i><b>7.3.3</b> Random Forests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>8</b> Optimization</a><ul>
+<li class="chapter" data-level="8.1" data-path="optimization.html"><a href="optimization.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="optimization.html"><a href="optimization.html#fundamentals-of-optimization"><i class="fa fa-check"></i><b>8.2</b> Fundamentals of Optimization</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="optimization.html"><a href="optimization.html#fermats-theorem"><i class="fa fa-check"></i><b>8.2.1</b> Fermat’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="optimization.html"><a href="optimization.html#regression"><i class="fa fa-check"></i><b>8.3</b> Regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="optimization.html"><a href="optimization.html#linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="optimization.html"><a href="optimization.html#nonlinear-regression"><i class="fa fa-check"></i><b>8.3.2</b> Nonlinear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="optimization.html"><a href="optimization.html#iterative-optimization-algorithms"><i class="fa fa-check"></i><b>8.4</b> Iterative Optimization Algorithms</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="optimization.html"><a href="optimization.html#gradient-descent"><i class="fa fa-check"></i><b>8.4.1</b> Gradient Descent</a></li>
+<li class="chapter" data-level="8.4.2" data-path="optimization.html"><a href="optimization.html#global-optimization"><i class="fa fa-check"></i><b>8.4.2</b> Global Optimization</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="optimization.html"><a href="optimization.html#calibration-of-dynamic-models"><i class="fa fa-check"></i><b>8.5</b> Calibration of Dynamic Models</a></li>
+<li class="chapter" data-level="8.6" data-path="optimization.html"><a href="optimization.html#uncertainty-analysis-and-bayesian-calibration"><i class="fa fa-check"></i><b>8.6</b> Uncertainty Analysis and Bayesian Calibration</a></li>
+<li class="chapter" data-level="8.7" data-path="optimization.html"><a href="optimization.html#references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quant Bio Modules</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multivariate-distance-and-cluster-analysis" class="section level1">
+<h1><span class="header-section-number">5</span> Multivariate distance and cluster analysis</h1>
+<div id="thinking-about-resemblence" class="section level2">
+<h2><span class="header-section-number">5.1</span> Thinking about resemblence</h2>
+<p>We are often interested in the question of how similar two things might be and a natural way to quantify similar is to list those characters that are shared. For example, what genetic or morphological features are the sameo or different between two species? A <strong>resemblance measure</strong> quantifies similarity by adding up in some way the similarities and differences between two things. In fact, this type of overall measure of the relationship among objects or attributes is a strating point for most multivariate analyses, and is often the most critical step. We can express the shared characters of objects as either:
+<strong>similarity (S)</strong>, which quantifies the degree of resemblance or <strong>dissimilarity (D)</strong> which quantifies the degree of difference.</p>
+<table style='width:50%;'>
+<caption>
+<span id="tab:t1">Table 5.1: </span><strong>Table 3.1</strong> List of shared attributes for two things
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+Attribute
+</th>
+<th style="text-align:center;">
+Object 1
+</th>
+<th style="text-align:center;">
+Object 2
+</th>
+<th style="text-align:center;">
+Similarity
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Attribute 1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+x
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+x
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 3
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 6
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 7
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+x
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 8
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 9
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+&lt;U+2713&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Attribute 10
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+x
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="binary-similarity-metrics" class="section level2">
+<h2><span class="header-section-number">5.2</span> Binary Similarity metrics</h2>
+<p>The simplest similarity metric just tallys the number of shared features. So we just indicate yes or no for each characteristic for each of the two things we wish to compare <a href="multivariate-distance-and-cluster-analysis.html#tab:t1">5.1</a>.
+<br>
+<br></p>
+<table style="width:50%; width: auto !important; " class="table table-bordered">
+<caption>
+<span id="tab:t2">Table 5.2: </span><strong>Table 3.2</strong> Summary of shared and absent atributes
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Object 1
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Object 2
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+Present
+</th>
+<th style="text-align:center;">
+Absent
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+Object 1
+</td>
+<td style="text-align:center;font-weight: bold;">
+Present
+</td>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+b
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;">
+Object 2
+</td>
+<td style="text-align:center;font-weight: bold;">
+Absent
+</td>
+<td style="text-align:center;">
+c
+</td>
+<td style="text-align:center;">
+d
+</td>
+</tr>
+</tbody>
+</table>
+<p>We could also find a shared lack of features and indicator of similarity. The simple matching coefficient uses both shared features, and shared absent features to quantify similarity as <span class="math inline">\(S_m=\frac{a+d}{a+b+c+d}\)</span>, where a refers to the number of characteristics that object 1 possesses and b is the number that object 2 possesses and so on (see <a href="multivariate-distance-and-cluster-analysis.html#tab:t2">5.2</a>).
+<br>
+<br></p>
+<p>We can further categorize similarity metrics as <strong>symmetric</strong>, where we regard both shared presence and shared absence as evidence of similarity. the simple matching coefficeint would be an example of this, or <strong>asymmetric</strong>, where
+we regard only shared presence as evidence of similarity (that is, we ignore shared absences). Asymmetric measures are most useful in analyzing ecological community data, since it is unlikely to be informative that two temperature zone communities lack tropical data, or that aquantic environments lack terrestrial species.</p>
+<p>The Jaccard index is an asymteric binary similarity coefficient calculated as <span class="math inline">\(S_J=\frac{a}{a+b+c}\)</span>, while the quite similar Sørenson index is given as <span class="math inline">\(S_S=\frac{2a}{2a+b+c}\)</span>, and so gives greater weight to shared similarities.both metrics range from 0 to 1, where a value of 1 indicates complete similarity.</p>
+<table style='width:50%;'>
+<caption>
+<span id="tab:t3">Table 5.3: </span><strong>Table 3.3</strong> Species presence and absence in lake Erie and lake Ontario (data from from Watson 1974)
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+species
+</th>
+<th style="text-align:center;">
+erie
+</th>
+<th style="text-align:center;">
+ontario
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+Let’s try an example. In the 70s, Watson (1974) compared the zooplankton species present in Lake Erie and Lake Ontario. We can use this information to compare how similar the communities in the two lakes were at this time. We can see that they shared a lot of species <a href="multivariate-distance-and-cluster-analysis.html#tab:t3">5.3</a>!</p>
+<p>We can calculate the similarity metrics quite easily using the table() function and the dataframe “lksp” where I have stored the data.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">tlake=<span class="kw">table</span>(lksp[,<span class="kw">c</span>(<span class="st">&quot;erie&quot;</span>,<span class="st">&quot;ontario&quot;</span>)])</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">tlake</a></code></pre></div>
+<pre><code>    ontario
+erie  1  0
+   1 18  1
+   0  1  4</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">a=tlake[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">b=tlake[<span class="dv">1</span>,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">c=tlake[<span class="dv">2</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb29-4" data-line-number="4">d=tlake[<span class="dv">2</span>,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">S_j=a<span class="op">/</span>(a<span class="op">+</span>b<span class="op">+</span>c)</a>
+<a class="sourceLine" id="cb29-7" data-line-number="7">S_j</a></code></pre></div>
+<pre><code>[1] 0.9</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">S_s=<span class="dv">2</span><span class="op">*</span>a<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a<span class="op">+</span>b<span class="op">+</span>c)</a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">S_s</a></code></pre></div>
+<pre><code>[1] 0.9473684</code></pre>
+<p>We can also talk about the dissimilarity between things. When a disimilarity or similarity metric has a finite range, we can simply convert from one to the other. For example, for similarities that range from 1 (identical) to 0 (completely different), dissimilarity would simply be 1-similarity.</p>
+</div>
+<div id="quantitative-similarity-dissimilarity-metrics" class="section level2">
+<h2><span class="header-section-number">5.3</span> Quantitative similarity &amp; dissimilarity metrics</h2>
+<p>While binary similarity metrics are easy to understand, there are a few problems. These metrics work best when we have a small number of characteristics and we have sampled very well (e.g., the zooplankton in Lake Erie and Ontario). The metrics are biased against maximum similarity values when we have lots of charactersitics or species and poor sampling.</p>
+<p>In addition, we sometimes have more information than just a “yes” or “no” which we could use to further charactersitize similarity. Quantiative similarity and dissimularity metrics make use of this information. Problems with Binary similarity coefficients. Work best: small number of items, heavy sampling. Some examples of quantitative similarity metrics you will see are: Percentage similarity (Renkonen index), Morisita’s index of similarity (not dispersion) and Horn’s index.</p>
+<p>There are also many quantitive dissimilarity metrics. For example, Bray Curtis dissimilarity is frequently used by ecologists to quantify differences between samples based on abundance or count data. This measure is usually applied to raw abundance data, but can be applied to relative abundances. In this case, we often talk about the “distance” between two things. Distances are of two types, either dissimilarity, converted from analogous similarity indices, or specific distance measures, such as Euclidean distance, which doesn’t have a counterpart in any similarity index. There are many, many such metrics, and obviously, you should choose the most accurate and meaningful distance measure for a given application. Legendre &amp; Legendre (2012) offers a key how to select an appropriate measure for given data and problem (check their Tables 7.4-7.6). If you uncertain then choose several distance measures and compare the results.</p>
+<div id="euclidean-distance" class="section level3">
+<h3><span class="header-section-number">5.3.1</span> Euclidean Distance</h3>
+<p>Perhaps the mostly commonly used dissimilarity or distance measure is Euclidian distance. This metric is zero for identical sampling units and has no fixed upper bound.</p>
+<div class="figure"><span id="fig:f2"></span>
+<img src="_main_files/figure-html/f2-1.png" alt="" width="672" />
+<p class="caption">
+Figure 5.1: Euclidean Distance
+</p>
+</div>
+<p>Eclidean distance in multivariate space is derived from our understanding of distance in a cartesian plane. If we had two species measured in in two different samples, we could then plot the abundance of species 1 and species 2 for each sample, and draw a line between them. This would be our Euclidean distance: the shortest path between the two points <a href="multivariate-distance-and-cluster-analysis.html#fig:f2">5.1</a>.</p>
+<p>We know that to calculate this distance we would just use the Pythagorean theorem as <span class="math inline">\(c=\sqrt{a^2+b^2}\)</span>. To generalize to n species we can say
+<span class="math inline">\(D^E_{jk}=\sqrt{\sum^n_{i=1}(X_{ij}-X_{ik})^2}\)</span>, where Euclidean distance between samples j and k, <span class="math inline">\(D^E_{jk}\)</span>, is calculated by summing over the distance in abundance of each of n species in the two samples.</p>
+<table style='width:50%;'>
+<caption>
+<span id="tab:t4">Table 5.4: </span>Species abundance and distance calculations for two samples
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+Sample j
+</th>
+<th style="text-align:center;">
+Sample k
+</th>
+<th style="text-align:center;">
+<span class="math inline">\((X_j-X_k)^2\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Species 1
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+256
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 2
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+625
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 3
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 4
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+900
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 5
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+50
+</td>
+<td style="text-align:center;">
+1600
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 6
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 7
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 8
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 9
+</td>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+400
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 10
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+TOTAL
+</td>
+<td style="text-align:center;">
+131
+</td>
+<td style="text-align:center;">
+113
+</td>
+<td style="text-align:center;">
+3794
+</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+Let’s try an example. Given the species abundances in <a href="multivariate-distance-and-cluster-analysis.html#tab:t4">5.4</a>, we can calculate the squared difference in abundance for each species, and sum that quantity. Then all we need is to take the square root to obtain the Euclidean distance. Did you get the correct answer of 61.6? Of course, R makes this much easier, I can calculate Euclidan distance using the <strong>dist()</strong> function, after creating a matrix of the two columns of species abundance data from my original eu dataframe.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">dist</span>(<span class="kw">rbind</span>(eu<span class="op">$</span>j[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], eu<span class="op">$</span>k[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]), <span class="dt">method =</span> <span class="st">&quot;euclidean&quot;</span>)</a></code></pre></div>
+<pre><code>         1
+2 61.59545</code></pre>
+</div>
+<div id="comparing-more-than-two-communitiessamplessitesgenesspecies" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Comparing more than two communities/samples/sites/genes/species</h3>
+<p>What about the situation where we want to compare more than two communtiies, species, samples or genes? We can simply generate a dissimilarity or similarity <strong>matrix</strong>, where each pairwise comparison is given.</p>
+<p>In the species composition matrix below <a href="multivariate-distance-and-cluster-analysis.html#tab:t5">5.5</a>, sample A and B do not share any species, while sample A and C share all species but differ in abundances (e.g. species 3 = 1 in sample A and 8 in sample C). The calculation of Euclidean distance using the <strong>dist()</strong> function produces a lower triangular matrix with the pairwise comparisons (I’ve included the distance with the sample itself on the diagonal).</p>
+<p>The Euclidan distance values suggest that A and B are the most similar! Euclidean distance puts more weight on differences in species abundances than on difference in species presences. As a result, two samples not sharing any species could appear more similar (with lower Euclidean distance) than two samples which share species that largely differ in their abundances.</p>
+<p>There are other disadvantages as well, and in general, there is simply no perfect metric. For example, you may dislike the fact that Euclidean distance also has no upper bound, and so it becomes difficult to understand <strong>how</strong> similar two things are (i.e., the metric can only be understood in a relative way when comparing many things, Sample A is more similar to Sample B than Sample C, for example). You could use a Pearson correlation coefficient instead, since it has an upper bound of 1.0, but this metric is very senstive to outliers, which is also a disadvantage.</p>
+<table style='width:50%;'>
+<caption>
+<span id="tab:t5">Table 5.5: </span>Species abundance versus species presence and Euclidean distance
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+</th>
+<th style="text-align:center;">
+Sample A
+</th>
+<th style="text-align:center;">
+Sample B
+</th>
+<th style="text-align:center;">
+Sample C
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Species 1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 2
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Species 3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+<br></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="kw">dist</span>(<span class="kw">t</span>(meu[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>]), <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>, <span class="dt">diag=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>         A        B        C
+A 0.000000                  
+B 1.732051 0.000000         
+C 7.615773 9.000000 0.000000</code></pre>
+</div>
+<div id="r-functions" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> R functions</h3>
+<p>There are a number of functions in R that can be used to calculate similarity and dissimilarity metrics. Since we are usually NOT just comparing two objects, sites or samples, these functions can help make your calculations much quicker when you are comparing many units.</p>
+<p><strong>dist()</strong> offers a number of distance measures - e.g. euclidean,canberra and manhattan. The result is the distance matrix which gives the dissimilarity of each pair of objects, sites or samples. the matrix is an object of the class dist in R.</p>
+<p><strong>vegdist()</strong> (library vegan) - default distance used in this function is Bray-Curtis distance, which is (in contrast to Euclidean distance) considered as more suitable for ecological data (it is a quantitative analog of Sørensen dissimilarity).</p>
+<p><strong>dsvdis()</strong> (library labdsv) - offers some other indices than vegdist, e.g. ruzicka (Růžička, quantitative analogue of Jaccard) and roberts.</p>
+<p>For full comparison of dist, vegdist and dsvdis,see <a href="http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html" class="uri">http://ecology.msu.montana.edu/labdsv/R/labs/lab8/lab8.html</a>.</p>
+<p><strong>dist.ldc()</strong> (library adespatial) - includes 21 dissimilarity indices described in Legendre &amp; De Cáceres (2013), twelve of which are not readily available in other packages. Note that Bray-Curtis dissimilarity is called percentage difference (method = “percentdiff”). By default this function returns an informative message as to whether the given dissimilarity index is Euclidean or not and whether it becomes Euclidean if square-rooted (as is the case of e.g. Bray-Curtis).</p>
+<p><strong>designdist()</strong> (library vegan) - allows one to design virtually any distance measure using the formula for their calculation.</p>
+<p><strong>daisy()</strong> (library cluster) - offers euclidean, manhattan and gower distance.</p>
+<p><strong>distance()</strong> (library ecodist) - contains seven distance measures, but the function is more for demonstration (for larger matrices, the calculation takes rather long).</p>
+</div>
+</div>
+<div id="cluster-analysis" class="section level2">
+<h2><span class="header-section-number">5.4</span> Cluster Analysis</h2>
+<p>When we have a large number of things to compare, and examination of a matrix of similarlity or dissimilatiry metrics can be tedious or even impossible to do. One way to visualize the similarity among units is to use some form of cluster analysis. Clustering is the classification of data objects into discrete similarity groups (clusters) according to a defined distance measure.</p>
+<p>So we can constrast clustering, which assumes that units (e.g., sites, communities, species or genes) can be grouped into discrete categories based on similarity, with ordination, which treats the similarity between units as a continuous gradient (we’ll discuss ordination in section XX). We can use clustering to do things like discern whether there are one or two or three different communities in three or four or five sampling units. It is used in many fields, such as machine learning, data mining, pattern recognition, image analysis, genomics, systems biology, etc. Machine learning typically regards data clustering as a form of unsupervised learning. It is “unsupervised” because we are not guided by a priori ideas of which variables or samples belong in which clusters. “Learning” because the machine algorithm “learns” how to cluster.</p>
+<div id="hierarchical-clustering-groups-are-nested-within-other-groups." class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Hierarchical clustering: groups are nested within other groups.</h3>
+<p>Perhaps the most familiar type of clustering is hierarchical. There are two kinds: <strong>divisive</strong> and <strong>agglomerative</strong>. In the divisive method, the entire set of units is dividied into smaller and smaller groups. The agglomerative method starts with small groups of few units, and groups them into larger and larger clusters, until the entire data set is sampled (Pielou, 1984). Of course, once you have more than two units, you need some way to assess similarlity between the clusters. There are a couple of different methods here. Single linkage assigns the similairty between clusters to the most similar units in each cluster. Complete linkage uses the similarity between the most dissmilar units in each cluster, while average linkage aveages over all the units in each cluster (<a href="multivariate-distance-and-cluster-analysis.html#fig:f6">5.2</a>).</p>
+<div class="figure"><span id="fig:f6"></span>
+<img src="_main_files/figure-html/f6-1.png" alt="" width="672" />
+<p class="caption">
+Figure 5.2: Different methods of determining similarity between clusters
+</p>
+</div>
+<div id="single-linkage-cluster-analysis" class="section level5">
+<h5><span class="header-section-number">5.4.1.0.1</span> Single Linkage Cluster Analysis</h5>
+<p>Single linkage cluster analysis is one of the easiest to explain. It is hierarchical, agglomerative technique. We start by creating a matrix of similarity (or dissimilarity) indices between the units we want to compare.</p>
+<p>Then we find the most similar pair of samples, and that will form the 1st cluster. Next, we find either: (a) the second most similar pair of samples or (b) highest similarity between a cluster and a sample, or (c) most similar pair of clusters, whichever is greatest. We then continue this process until until there is one big cluster. Remember that in single linkage, similarity between two clusters = similarity between the two nearest members of the clusters. Or if we are comparing a sample to a cluster, the similarity is defined as, the similarity between sample and the nearest member of the cluster.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">cls=<span class="kw">data.frame</span>(<span class="dt">a=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">34</span>,<span class="dv">1</span>,<span class="dv">12</span>),<span class="dt">b=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">32</span>,<span class="dv">4</span>),  <span class="dt">c=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">59</span>,<span class="dv">32</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">d=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">63</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">45</span>), <span class="dt">e=</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">90</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">clsd=<span class="kw">dist</span>(<span class="kw">t</span>(cls), <span class="dt">method=</span><span class="st">&quot;euclidean&quot;</span>)</a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">clsd</a></code></pre></div>
+<pre><code>          a         b         c         d
+b  45.81484                              
+c  53.82379  72.01389                    
+d  73.73602  80.56054  51.57519          
+e  94.50397  58.41233 107.24738 114.91736</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+</div>
+<div id="r-functions-1" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> R functions</h3>
+<p>Agglomerative approach (bottom-up)
+<strong>hclust()</strong> calculates hierarchical cluster analysis. Requires at least two arguments: d for distance matrix, and method for agglomerative algorithm, one of ward.D, ward.D2, single, complete, average (= UPGMA), mcquitty (= WPGMA), median (= WPGMC) or centroid (= UPGMC). Has it’s own plot function.</p>
+<p>and <strong>agnes()</strong> (library cluster) - contains six agglomerative algorithms, some not included in hclust.</p>
+<p>Divisive approach (top-down)
+<strong>diana()</strong></p>
+</div>
+<div id="how-many-clusters" class="section level3">
+<h3><span class="header-section-number">5.4.3</span> How many clusters</h3>
+<p><img src="_main_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+Drafty below</p>
+<hr />
+</div>
+<div id="k-means-clustering" class="section level3">
+<h3><span class="header-section-number">5.4.4</span> K-Means Clustering</h3>
+<p>Partitional Clustering: A division of data objects into non-overlapping subsets</p>
+<p>(clusters) such that each data object is in exactly one subset</p>
+<p>Each cluster is associated with a centroid (center point)</p>
+<p>Each point is assigned to the cluster with the closest centroid</p>
+<p>Number of clusters, K, must be specified</p>
+<ol style="list-style-type: decimal">
+<li>Choose the number of K clusters</li>
+<li>Select K points as the initial centroids</li>
+<li>Calculate the distance of all items to the K centroids</li>
+<li>Assign items to closest centroid</li>
+<li>Recompute the centroid of each cluster</li>
+<li>Repeat from (3) until clusters assignments are stable</li>
+</ol>
+<p>K-means has problems when clusters are of differing
+– Sizes
+– Densities
+– Non-globular shapes</p>
+<p>K-means has problems when the data contains outliers.</p>
+</div>
+<div id="fuzzy-c-means-clustering" class="section level3">
+<h3><span class="header-section-number">5.4.5</span> Fuzzy C-Means Clustering</h3>
+<p>In contrast to strict (hard) clustering approaches, fuzzy (soft) clustering methods allow multiple cluster memberships of the clustered items.</p>
+<p>This is commonly achieved by assigning to each item a weight of belonging to each cluster.</p>
+<p>Thus, items at the edge of a cluster, may be in a cluster to a lesser degree than items at the center of a cluster.</p>
+<p>Typically, each item has as many coefficients (weights) as there are clusters that sum up for each item to one.</p>
+</div>
+</div>
+<div id="exercise-cluster-analysis-of-isotope-data" class="section level2">
+<h2><span class="header-section-number">5.5</span> Exercise: Cluster analysis of isotope data</h2>
+<p>we will read data into R. Download and import the dataset “Dataset_S1.csv” from Perkins et al. 2014 on the learn site in the lab folder. This data contains δ15N and δ13C signatures for species from different food webs.
+To read data into R one of the easiest options is to use the read.csv() function with the argument on a .csv file. These Comma Separated Files are one of your best options for reproducible research. They are human readable and easily handled by almost every time of software.</p>
+<p>Once you have successfully read your data file into R, take a look at it! Type mydata (or whatever you named your data object) to see if the data file was read in properly. Some datasets will be too large for this approach to be useful (the data will scroll right off the page). In that case, there are a number of commands to look at a portion of the dataset. You could use a command like names(mydata), but it has one obvious shortcoming. What is it?</p>
+<p>One of the best things to do is plot the imported data. Of course, this is not always possible with very large datasets, but this set should work. Use the plot function as plot(iso<span class="math inline">\(N~iso\)</span>C, pch=16, xlab=“C”, ylab=“N”) to take a quick look.</p>
+<p>We are going to use this data set to see if a cluster analysis on δ15N and δ13C can identify the foodweb and trophic level of different species. That is we are going to “supervise” our unsupervised learning algorithm. Our first step is to create a dissimilarity matrix, but even before this, we must select that part of the data that we wish to use. We’ll be creating the dissimilarity matrix using just the δ15N and δ13C data, not the other components of the dataframe, so you will need to select and save just these two columns.</p>
+<p>In addition, our analysis will be affected by the missing data. So let’s get remove those rows with missing data right now using the complete.cases() function. The function returns a value of TRUE for every row in a dataframe that no missing values in any column. So newdat=mydata[complete.cases(mydata),], will be a new data frame with only complete row entries.
+Select and save only the C and N columns of this data, and you should be set to create a dissimilarity matrix.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Create a dissimilarity matrix using dist()
+The function dist() will generate a matrix of the pairwise Euclidean distances between pairs of observations. Instead of “euclidean”, you can also use these distance measures of the dist() function “maximum”, “manhattan”, “canberra”, “binary” or “minkowski”. Check the help file for dist() by typing ?dist.</p></li>
+<li><p>Complete a hierarchical cluster analysis
+Now that you have a dissimilarity matrix, you complete a cluster analysis. The function hclust() will produce a data.frame that can be sent to the plot() function plotted to visualize the recommended clustering. The method used to complete the analysis is indicated below the graph.
+Please adjust the arguments of the function to complete a single linkage analysis (look at help(hclust)) to determine the method to do this).</p></li>
+</ol>
+<p>When you graph your cluster using plot(), you notice that there are many individual measurements, but there are only a few large groups. Does it look like there is an outlier? If so, you may want to remove this point from the data set, and then rerun the analysis. Remember to remove the point from the dataframe that has all the food chain info in it, otherwise you will have problems plotting later.</p>
+<p>When you examine the data set, you noted that there are 4 Food.chain designations. We will use the cutree() function to cut our cluster tree to get the desired number of groups, and then save
+the group numbers to a new column in our original dataframe. For example, newdata$clust&lt;- cutree(p,4).</p>
+<p>We can then plot the data using colours and symbols to see how well our clustering works
+plot(ndata<span class="math inline">\(N~ndata\)</span>C, pch=as.numeric(ndata<span class="math inline">\(Food.Chain), col=ndata\)</span>clust,xlab=“C”, ylab=“N”,main=“Four clusters”) legend(“topright”, legend=c(1:4),pch=1,col=c(1:4), bty=“n”) legend(“bottom”, legend=as.character(levels(iso$Food.Chain)[2:5]), pch=c(2:5), bty=“n”)
+If you are not happy with the success of this clustering algorithm you could try other variants. For example the “complete” linkage variant.</p>
+<p>BTW If you are feeling bored try a heatmap() display of the cluster analysis. This function works on the raw N and C data, but we have to send the data as a matrix rather than a dataframe, and we have to transpose it using the t() function as heatmap(as.matrix(t(net))).</p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Clustering with kmeans()
+Let’s try a non-hierarchical cluster analysis on the same data. The kmeans() function requires that we select the required number of clusters ahead of time (4) as kclust=kmeans(ndata, 4), we can then save the assigned clusters to our dataframe as ndata<span class="math inline">\(kclust=kclust\)</span>cluster, and plot in a similar way
+You can compare your clustering methods with a side by side plot. Just enter the command par(mfrow=c(1,2)), and then each plot statement. You can also compare by generating a table of the Food.chain and cluster designations for each method (e.g., table(ndata$Food.Chain, ndata $clust)</p></li>
+<li><p>Fuzzy clustering with the package cluster and fanny()
+To compete a fuzzy cluster analysis, you will need to install the package “cluster” on your computer, read the library into memory and then use the fanny() function</p></li>
+</ol>
+<p>Perkins, M.J., McDonald, R.A., van Veen, F.F., Kelly, S.D., Rees, G. and Bearhop, S., 2014. Application of nitrogen and carbon stable isotopes (δ15N and δ13C) to quantify food chain length and trophic structure. PloS one, 9(3), p.e93281.</p>
+<hr />
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-multivariate-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ordination.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

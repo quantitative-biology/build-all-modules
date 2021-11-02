@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Introduction to multivariate analysis | Quant Bio Modules</title>
+  <meta name="description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Introduction to multivariate analysis | Quant Bio Modules" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Introduction to multivariate analysis | Quant Bio Modules" />
+  
+  <meta name="twitter:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  
+
+<meta name="author" content="Kim Cuddington, Andrew Edwards, Brian Ingalls" />
+
+
+<meta name="date" content="2021-11-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r-markdown.html"/>
+<link rel="next" href="multivariate-distance-and-cluster-analysis.html"/>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html"><i class="fa fa-check"></i><b>2</b> Introduction to Git and GitHub</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-are-git-and-github-and-how-might-they-be-useful"><i class="fa fa-check"></i><b>2.1</b> What are Git and GitHub and how might they be useful?</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#you-just-want-do-download-someone-elses-code-from-their-github-repository"><i class="fa fa-check"></i><b>2.2</b> You just want do download someone else’s code from their GitHub repository</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#motivation-for-learning-more"><i class="fa fa-check"></i><b>2.3</b> Motivation for learning more</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-application-pacific-hake-stock-assessment"><i class="fa fa-check"></i><b>2.3.1</b> Example application – Pacific Hake stock assessment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#examples-of-what-we-can-avoid"><i class="fa fa-check"></i><b>2.3.2</b> Examples of what we can avoid</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-of-advantages-that-arise-from-using-github"><i class="fa fa-check"></i><b>2.3.3</b> Example of advantages that arise from using GitHub</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#why-this-course"><i class="fa fa-check"></i><b>2.3.4</b> Why this course?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#does-it-matter-which-computer-language-my-code-is-in"><i class="fa fa-check"></i><b>2.3.5</b> Does it matter which computer language my code is in?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#getting-set-up-for-the-first-time"><i class="fa fa-check"></i><b>2.4</b> Getting set up for the first time</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-you-will-end-up-having-installed"><i class="fa fa-check"></i><b>2.4.1</b> What you will end up having installed</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#text-editor"><i class="fa fa-check"></i><b>2.4.2</b> Text Editor</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-the-git-application-on-your-machine"><i class="fa fa-check"></i><b>2.4.3</b> Install the Git application on your machine</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell"><i class="fa fa-check"></i><b>2.4.4</b> Git shell</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell-rstudio"><i class="fa fa-check"></i><b>2.4.5</b> Git shell, RStudio</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#powershell-and-posh-git"><i class="fa fa-check"></i><b>2.4.6</b> Powershell and posh-git</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#one-time-authentication"><i class="fa fa-check"></i><b>2.4.7</b> One-time authentication</a></li>
+<li class="chapter" data-level="2.4.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#configure-the-git-application"><i class="fa fa-check"></i><b>2.4.8</b> Configure the Git application</a></li>
+<li class="chapter" data-level="2.4.9" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-a-difftool-optional"><i class="fa fa-check"></i><b>2.4.9</b> Install a difftool (optional)</a></li>
+<li class="chapter" data-level="2.4.10" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#save-our-template-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.10</b> Save our template <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.11" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#edit-the-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.11</b> Edit the <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.12" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#mac-only-make-your-output-pretty"><i class="fa fa-check"></i><b>2.4.12</b> MAC only: make your output pretty</a></li>
+<li class="chapter" data-level="2.4.13" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#navigating-in-a-shell"><i class="fa fa-check"></i><b>2.4.13</b> Navigating in a shell</a></li>
+<li class="chapter" data-level="2.4.14" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#something-to-view-markdown-files-optional"><i class="fa fa-check"></i><b>2.4.14</b> Something to view Markdown files (optional)</a></li>
+<li class="chapter" data-level="2.4.15" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#bonus-keyboard-shortcut"><i class="fa fa-check"></i><b>2.4.15</b> Bonus keyboard shortcut</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-share-your-own-code"><i class="fa fa-check"></i><b>2.5</b> Using Git and GitHub to share your own code</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#definitions"><i class="fa fa-check"></i><b>2.5.1</b> Definitions</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#creating-a-new-repository"><i class="fa fa-check"></i><b>2.5.2</b> Creating a new repository</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#cloning-your-new-repository"><i class="fa fa-check"></i><b>2.5.3</b> Cloning your new repository</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#committing"><i class="fa fa-check"></i><b>2.5.4</b> Committing</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-1-create-edit-and-commit-simpletext.txt"><i class="fa fa-check"></i><b>2.5.5</b> Exercise 1: create, edit and commit <em>simpleText.txt</em></a></li>
+<li class="chapter" data-level="2.5.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-2-multiple-files"><i class="fa fa-check"></i><b>2.5.6</b> Exercise 2: multiple files</a></li>
+<li class="chapter" data-level="2.5.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-to-write-in-commit-messages"><i class="fa fa-check"></i><b>2.5.7</b> What to write in commit messages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-collaborate-with-colleagues"><i class="fa fa-check"></i><b>2.6</b> Using Git and GitHub to collaborate with colleagues</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#demonstration-of-collaborating"><i class="fa fa-check"></i><b>2.6.1</b> Demonstration of collaborating</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#a-bit-more-about-git-rebase"><i class="fa fa-check"></i><b>2.6.2</b> A bit more about git rebase</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#fixing-a-conflict"><i class="fa fa-check"></i><b>2.6.3</b> Fixing a conflict</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-3-collaborating-on-a-single-repository"><i class="fa fa-check"></i><b>2.6.4</b> Exercise 3: collaborating on a single repository</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#collaborating-summary"><i class="fa fa-check"></i><b>2.6.5</b> Collaborating summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#workflow-tips-when-collaborating"><i class="fa fa-check"></i><b>2.7</b> Workflow tips when collaborating</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#beyond-the-basics-of-git-and-github-getting-more-advanced"><i class="fa fa-check"></i><b>2.8</b> Beyond the basics of Git and GitHub – getting more advanced</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-ive-made-some-changes-but-dont-really-want-to-keep-them-git-stash"><i class="fa fa-check"></i><b>2.8.1</b> So I’ve made some changes but don’t really want to keep them – git stash</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#the-power-to-go-back"><i class="fa fa-check"></i><b>2.8.2</b> The power to go back</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-how-does-git-do-all-this"><i class="fa fa-check"></i><b>2.8.3</b> So how does Git do all this?</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-terminology"><i class="fa fa-check"></i><b>2.8.4</b> Git terminology</a></li>
+<li class="chapter" data-level="2.8.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#branching"><i class="fa fa-check"></i><b>2.8.5</b> Branching</a></li>
+<li class="chapter" data-level="2.8.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#pull-requests"><i class="fa fa-check"></i><b>2.8.6</b> Pull requests</a></li>
+<li class="chapter" data-level="2.8.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#undoing-stuff"><i class="fa fa-check"></i><b>2.8.7</b> Undoing stuff</a></li>
+<li class="chapter" data-level="2.8.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-r-and-github-within-rstudio"><i class="fa fa-check"></i><b>2.8.8</b> Using R and GitHub within RStudio</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Markdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#basic-idea"><i class="fa fa-check"></i><b>3.2</b> Basic idea</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#simple-example"><i class="fa fa-check"></i><b>3.3</b> Simple example</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#exercise"><i class="fa fa-check"></i><b>3.3.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#output-format"><i class="fa fa-check"></i><b>3.4</b> Output format</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#further-reading"><i class="fa fa-check"></i><b>3.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-multivariate-analysis.html"><a href="introduction-to-multivariate-analysis.html"><i class="fa fa-check"></i><b>4</b> Introduction to multivariate analysis</a></li>
+<li class="chapter" data-level="5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html"><i class="fa fa-check"></i><b>5</b> Multivariate distance and cluster analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#thinking-about-resemblence"><i class="fa fa-check"></i><b>5.1</b> Thinking about resemblence</a></li>
+<li class="chapter" data-level="5.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#binary-similarity-metrics"><i class="fa fa-check"></i><b>5.2</b> Binary Similarity metrics</a></li>
+<li class="chapter" data-level="5.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#quantitative-similarity-dissimilarity-metrics"><i class="fa fa-check"></i><b>5.3</b> Quantitative similarity &amp; dissimilarity metrics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#euclidean-distance"><i class="fa fa-check"></i><b>5.3.1</b> Euclidean Distance</a></li>
+<li class="chapter" data-level="5.3.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#comparing-more-than-two-communitiessamplessitesgenesspecies"><i class="fa fa-check"></i><b>5.3.2</b> Comparing more than two communities/samples/sites/genes/species</a></li>
+<li class="chapter" data-level="5.3.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions"><i class="fa fa-check"></i><b>5.3.3</b> R functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Cluster Analysis</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#hierarchical-clustering-groups-are-nested-within-other-groups."><i class="fa fa-check"></i><b>5.4.1</b> Hierarchical clustering: groups are nested within other groups.</a></li>
+<li class="chapter" data-level="5.4.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions-1"><i class="fa fa-check"></i><b>5.4.2</b> R functions</a></li>
+<li class="chapter" data-level="5.4.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#how-many-clusters"><i class="fa fa-check"></i><b>5.4.3</b> How many clusters</a></li>
+<li class="chapter" data-level="5.4.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#k-means-clustering"><i class="fa fa-check"></i><b>5.4.4</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="5.4.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#fuzzy-c-means-clustering"><i class="fa fa-check"></i><b>5.4.5</b> Fuzzy C-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#exercise-cluster-analysis-of-isotope-data"><i class="fa fa-check"></i><b>5.5</b> Exercise: Cluster analysis of isotope data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ordination.html"><a href="ordination.html"><i class="fa fa-check"></i><b>6</b> Ordination</a><ul>
+<li class="chapter" data-level="6.1" data-path="ordination.html"><a href="ordination.html#ordination-as-data-reduction"><i class="fa fa-check"></i><b>6.1</b> Ordination as data reduction</a></li>
+<li class="chapter" data-level="6.2" data-path="ordination.html"><a href="ordination.html#methods-of-ordination"><i class="fa fa-check"></i><b>6.2</b> Methods of Ordination</a></li>
+<li class="chapter" data-level="6.3" data-path="ordination.html"><a href="ordination.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>6.3</b> Principal Components Analysis (PCA)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>7</b> Machine learning</a><ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning.html"><a href="machine-learning.html#classification"><i class="fa fa-check"></i><b>7.1</b> Classification</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning.html"><a href="machine-learning.html#logistic-regression-as-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.1</b> Logistic regression as a binary classifier</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning.html"><a href="machine-learning.html#interpreting-the-logistic-regression"><i class="fa fa-check"></i><b>7.1.2</b> Interpreting the logistic regression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning.html"><a href="machine-learning.html#measuring-the-performance-of-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.3</b> Measuring the performance of a binary classifier</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning.html"><a href="machine-learning.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>7.1.4</b> Multiple logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning.html"><a href="machine-learning.html#cross-validation"><i class="fa fa-check"></i><b>7.2</b> Cross-validation</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning.html"><a href="machine-learning.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>7.2.1</b> k-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="machine-learning.html"><a href="machine-learning.html#tree-based-methods-for-classification"><i class="fa fa-check"></i><b>7.3</b> Tree-based methods for classification</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="machine-learning.html"><a href="machine-learning.html#classification-and-regression-trees-carts"><i class="fa fa-check"></i><b>7.3.1</b> Classification and regression trees (CARTs)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="machine-learning.html"><a href="machine-learning.html#tree-pruning"><i class="fa fa-check"></i><b>7.3.2</b> Tree pruning</a></li>
+<li class="chapter" data-level="7.3.3" data-path="machine-learning.html"><a href="machine-learning.html#random-forests"><i class="fa fa-check"></i><b>7.3.3</b> Random Forests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>8</b> Optimization</a><ul>
+<li class="chapter" data-level="8.1" data-path="optimization.html"><a href="optimization.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="optimization.html"><a href="optimization.html#fundamentals-of-optimization"><i class="fa fa-check"></i><b>8.2</b> Fundamentals of Optimization</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="optimization.html"><a href="optimization.html#fermats-theorem"><i class="fa fa-check"></i><b>8.2.1</b> Fermat’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="optimization.html"><a href="optimization.html#regression"><i class="fa fa-check"></i><b>8.3</b> Regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="optimization.html"><a href="optimization.html#linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="optimization.html"><a href="optimization.html#nonlinear-regression"><i class="fa fa-check"></i><b>8.3.2</b> Nonlinear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="optimization.html"><a href="optimization.html#iterative-optimization-algorithms"><i class="fa fa-check"></i><b>8.4</b> Iterative Optimization Algorithms</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="optimization.html"><a href="optimization.html#gradient-descent"><i class="fa fa-check"></i><b>8.4.1</b> Gradient Descent</a></li>
+<li class="chapter" data-level="8.4.2" data-path="optimization.html"><a href="optimization.html#global-optimization"><i class="fa fa-check"></i><b>8.4.2</b> Global Optimization</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="optimization.html"><a href="optimization.html#calibration-of-dynamic-models"><i class="fa fa-check"></i><b>8.5</b> Calibration of Dynamic Models</a></li>
+<li class="chapter" data-level="8.6" data-path="optimization.html"><a href="optimization.html#uncertainty-analysis-and-bayesian-calibration"><i class="fa fa-check"></i><b>8.6</b> Uncertainty Analysis and Bayesian Calibration</a></li>
+<li class="chapter" data-level="8.7" data-path="optimization.html"><a href="optimization.html#references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quant Bio Modules</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-multivariate-analysis" class="section level1">
+<h1><span class="header-section-number">4</span> Introduction to multivariate analysis</h1>
+<p>In this module we’ll be disccusing multivariate quantitative methods. These methods are used for data where there is more than one response or measurement which we are trying to understand by using more than one feature or characteristic of the system. For example we may wish to understand how both precipitation and soil type are related to plant community composition. In this question, we may be tracking the abundance of over a dozen different species and many different sites with different types of soil, precipitation and other environmental factors. You can easily see that this is not a situation that ordinary univariate approaches are designed to handle!</p>
+<p><br>
+<br></p>
+<div class="figure"><span id="fig:f1"></span>
+<img src="_main_files/figure-html/f1-1.png" alt="A 4 quadrant plane titled Types of mulitvariate analysis.where the vertical axis has lables response variable at the top and latent variable at the bottom. The top left quadrant contans the text Regression in green, the bottom left contains the word Ordination in orange, the top right contains the word Classification in red, and the bottom right contains the word Clustering in blue." width="576" />
+<p class="caption">
+Figure 4.1: Types of multivariate analysis
+</p>
+</div>
+<p><br></p>
+<p>There are many types of maultivariate analysis, and in this module we will only describe some of the most common ones. We can think of these different types of anlaysis as laying at different ends of a spectrum of treating the data as discrete vs continuous, and relying on identfying a reponse variable a priori versus letting the “data tell us” about explanatory features, i.e., latent variables (<a href="introduction-to-multivariate-analysis.html#fig:f1">4.1</a>.</p>
+<p><br>
+<br></p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r-markdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multivariate-distance-and-cluster-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

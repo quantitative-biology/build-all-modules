@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Ordination | Quant Bio Modules</title>
+  <meta name="description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Ordination | Quant Bio Modules" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Ordination | Quant Bio Modules" />
+  
+  <meta name="twitter:description" content="A set of modules on quantitaitve topics for biology graduates" />
+  
+
+<meta name="author" content="Kim Cuddington, Andrew Edwards, Brian Ingalls" />
+
+
+<meta name="date" content="2021-11-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multivariate-distance-and-cluster-analysis.html"/>
+<link rel="next" href="machine-learning.html"/>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html"><i class="fa fa-check"></i><b>2</b> Introduction to Git and GitHub</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-are-git-and-github-and-how-might-they-be-useful"><i class="fa fa-check"></i><b>2.1</b> What are Git and GitHub and how might they be useful?</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#you-just-want-do-download-someone-elses-code-from-their-github-repository"><i class="fa fa-check"></i><b>2.2</b> You just want do download someone else’s code from their GitHub repository</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#motivation-for-learning-more"><i class="fa fa-check"></i><b>2.3</b> Motivation for learning more</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-application-pacific-hake-stock-assessment"><i class="fa fa-check"></i><b>2.3.1</b> Example application – Pacific Hake stock assessment</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#examples-of-what-we-can-avoid"><i class="fa fa-check"></i><b>2.3.2</b> Examples of what we can avoid</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#example-of-advantages-that-arise-from-using-github"><i class="fa fa-check"></i><b>2.3.3</b> Example of advantages that arise from using GitHub</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#why-this-course"><i class="fa fa-check"></i><b>2.3.4</b> Why this course?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#does-it-matter-which-computer-language-my-code-is-in"><i class="fa fa-check"></i><b>2.3.5</b> Does it matter which computer language my code is in?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#getting-set-up-for-the-first-time"><i class="fa fa-check"></i><b>2.4</b> Getting set up for the first time</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-you-will-end-up-having-installed"><i class="fa fa-check"></i><b>2.4.1</b> What you will end up having installed</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#text-editor"><i class="fa fa-check"></i><b>2.4.2</b> Text Editor</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-the-git-application-on-your-machine"><i class="fa fa-check"></i><b>2.4.3</b> Install the Git application on your machine</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell"><i class="fa fa-check"></i><b>2.4.4</b> Git shell</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-shell-rstudio"><i class="fa fa-check"></i><b>2.4.5</b> Git shell, RStudio</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#powershell-and-posh-git"><i class="fa fa-check"></i><b>2.4.6</b> Powershell and posh-git</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#one-time-authentication"><i class="fa fa-check"></i><b>2.4.7</b> One-time authentication</a></li>
+<li class="chapter" data-level="2.4.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#configure-the-git-application"><i class="fa fa-check"></i><b>2.4.8</b> Configure the Git application</a></li>
+<li class="chapter" data-level="2.4.9" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#install-a-difftool-optional"><i class="fa fa-check"></i><b>2.4.9</b> Install a difftool (optional)</a></li>
+<li class="chapter" data-level="2.4.10" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#save-our-template-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.10</b> Save our template <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.11" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#edit-the-.gitconfig-file"><i class="fa fa-check"></i><b>2.4.11</b> Edit the <em>.gitconfig</em> file</a></li>
+<li class="chapter" data-level="2.4.12" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#mac-only-make-your-output-pretty"><i class="fa fa-check"></i><b>2.4.12</b> MAC only: make your output pretty</a></li>
+<li class="chapter" data-level="2.4.13" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#navigating-in-a-shell"><i class="fa fa-check"></i><b>2.4.13</b> Navigating in a shell</a></li>
+<li class="chapter" data-level="2.4.14" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#something-to-view-markdown-files-optional"><i class="fa fa-check"></i><b>2.4.14</b> Something to view Markdown files (optional)</a></li>
+<li class="chapter" data-level="2.4.15" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#bonus-keyboard-shortcut"><i class="fa fa-check"></i><b>2.4.15</b> Bonus keyboard shortcut</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-share-your-own-code"><i class="fa fa-check"></i><b>2.5</b> Using Git and GitHub to share your own code</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#definitions"><i class="fa fa-check"></i><b>2.5.1</b> Definitions</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#creating-a-new-repository"><i class="fa fa-check"></i><b>2.5.2</b> Creating a new repository</a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#cloning-your-new-repository"><i class="fa fa-check"></i><b>2.5.3</b> Cloning your new repository</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#committing"><i class="fa fa-check"></i><b>2.5.4</b> Committing</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-1-create-edit-and-commit-simpletext.txt"><i class="fa fa-check"></i><b>2.5.5</b> Exercise 1: create, edit and commit <em>simpleText.txt</em></a></li>
+<li class="chapter" data-level="2.5.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-2-multiple-files"><i class="fa fa-check"></i><b>2.5.6</b> Exercise 2: multiple files</a></li>
+<li class="chapter" data-level="2.5.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#what-to-write-in-commit-messages"><i class="fa fa-check"></i><b>2.5.7</b> What to write in commit messages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-git-and-github-to-collaborate-with-colleagues"><i class="fa fa-check"></i><b>2.6</b> Using Git and GitHub to collaborate with colleagues</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#demonstration-of-collaborating"><i class="fa fa-check"></i><b>2.6.1</b> Demonstration of collaborating</a></li>
+<li class="chapter" data-level="2.6.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#a-bit-more-about-git-rebase"><i class="fa fa-check"></i><b>2.6.2</b> A bit more about git rebase</a></li>
+<li class="chapter" data-level="2.6.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#fixing-a-conflict"><i class="fa fa-check"></i><b>2.6.3</b> Fixing a conflict</a></li>
+<li class="chapter" data-level="2.6.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#exercise-3-collaborating-on-a-single-repository"><i class="fa fa-check"></i><b>2.6.4</b> Exercise 3: collaborating on a single repository</a></li>
+<li class="chapter" data-level="2.6.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#collaborating-summary"><i class="fa fa-check"></i><b>2.6.5</b> Collaborating summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#workflow-tips-when-collaborating"><i class="fa fa-check"></i><b>2.7</b> Workflow tips when collaborating</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#beyond-the-basics-of-git-and-github-getting-more-advanced"><i class="fa fa-check"></i><b>2.8</b> Beyond the basics of Git and GitHub – getting more advanced</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-ive-made-some-changes-but-dont-really-want-to-keep-them-git-stash"><i class="fa fa-check"></i><b>2.8.1</b> So I’ve made some changes but don’t really want to keep them – git stash</a></li>
+<li class="chapter" data-level="2.8.2" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#the-power-to-go-back"><i class="fa fa-check"></i><b>2.8.2</b> The power to go back</a></li>
+<li class="chapter" data-level="2.8.3" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#so-how-does-git-do-all-this"><i class="fa fa-check"></i><b>2.8.3</b> So how does Git do all this?</a></li>
+<li class="chapter" data-level="2.8.4" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#git-terminology"><i class="fa fa-check"></i><b>2.8.4</b> Git terminology</a></li>
+<li class="chapter" data-level="2.8.5" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#branching"><i class="fa fa-check"></i><b>2.8.5</b> Branching</a></li>
+<li class="chapter" data-level="2.8.6" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#pull-requests"><i class="fa fa-check"></i><b>2.8.6</b> Pull requests</a></li>
+<li class="chapter" data-level="2.8.7" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#undoing-stuff"><i class="fa fa-check"></i><b>2.8.7</b> Undoing stuff</a></li>
+<li class="chapter" data-level="2.8.8" data-path="introduction-to-git-and-github.html"><a href="introduction-to-git-and-github.html#using-r-and-github-within-rstudio"><i class="fa fa-check"></i><b>2.8.8</b> Using R and GitHub within RStudio</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Markdown</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#basic-idea"><i class="fa fa-check"></i><b>3.2</b> Basic idea</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#simple-example"><i class="fa fa-check"></i><b>3.3</b> Simple example</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#exercise"><i class="fa fa-check"></i><b>3.3.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#output-format"><i class="fa fa-check"></i><b>3.4</b> Output format</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-r-markdown.html"><a href="introduction-to-r-markdown.html#further-reading"><i class="fa fa-check"></i><b>3.5</b> Further reading</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-multivariate-analysis.html"><a href="introduction-to-multivariate-analysis.html"><i class="fa fa-check"></i><b>4</b> Introduction to multivariate analysis</a></li>
+<li class="chapter" data-level="5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html"><i class="fa fa-check"></i><b>5</b> Multivariate distance and cluster analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#thinking-about-resemblence"><i class="fa fa-check"></i><b>5.1</b> Thinking about resemblence</a></li>
+<li class="chapter" data-level="5.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#binary-similarity-metrics"><i class="fa fa-check"></i><b>5.2</b> Binary Similarity metrics</a></li>
+<li class="chapter" data-level="5.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#quantitative-similarity-dissimilarity-metrics"><i class="fa fa-check"></i><b>5.3</b> Quantitative similarity &amp; dissimilarity metrics</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#euclidean-distance"><i class="fa fa-check"></i><b>5.3.1</b> Euclidean Distance</a></li>
+<li class="chapter" data-level="5.3.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#comparing-more-than-two-communitiessamplessitesgenesspecies"><i class="fa fa-check"></i><b>5.3.2</b> Comparing more than two communities/samples/sites/genes/species</a></li>
+<li class="chapter" data-level="5.3.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions"><i class="fa fa-check"></i><b>5.3.3</b> R functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#cluster-analysis"><i class="fa fa-check"></i><b>5.4</b> Cluster Analysis</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#hierarchical-clustering-groups-are-nested-within-other-groups."><i class="fa fa-check"></i><b>5.4.1</b> Hierarchical clustering: groups are nested within other groups.</a></li>
+<li class="chapter" data-level="5.4.2" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#r-functions-1"><i class="fa fa-check"></i><b>5.4.2</b> R functions</a></li>
+<li class="chapter" data-level="5.4.3" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#how-many-clusters"><i class="fa fa-check"></i><b>5.4.3</b> How many clusters</a></li>
+<li class="chapter" data-level="5.4.4" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#k-means-clustering"><i class="fa fa-check"></i><b>5.4.4</b> K-Means Clustering</a></li>
+<li class="chapter" data-level="5.4.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#fuzzy-c-means-clustering"><i class="fa fa-check"></i><b>5.4.5</b> Fuzzy C-Means Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="multivariate-distance-and-cluster-analysis.html"><a href="multivariate-distance-and-cluster-analysis.html#exercise-cluster-analysis-of-isotope-data"><i class="fa fa-check"></i><b>5.5</b> Exercise: Cluster analysis of isotope data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="ordination.html"><a href="ordination.html"><i class="fa fa-check"></i><b>6</b> Ordination</a><ul>
+<li class="chapter" data-level="6.1" data-path="ordination.html"><a href="ordination.html#ordination-as-data-reduction"><i class="fa fa-check"></i><b>6.1</b> Ordination as data reduction</a></li>
+<li class="chapter" data-level="6.2" data-path="ordination.html"><a href="ordination.html#methods-of-ordination"><i class="fa fa-check"></i><b>6.2</b> Methods of Ordination</a></li>
+<li class="chapter" data-level="6.3" data-path="ordination.html"><a href="ordination.html#principal-components-analysis-pca"><i class="fa fa-check"></i><b>6.3</b> Principal Components Analysis (PCA)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>7</b> Machine learning</a><ul>
+<li class="chapter" data-level="7.1" data-path="machine-learning.html"><a href="machine-learning.html#classification"><i class="fa fa-check"></i><b>7.1</b> Classification</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="machine-learning.html"><a href="machine-learning.html#logistic-regression-as-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.1</b> Logistic regression as a binary classifier</a></li>
+<li class="chapter" data-level="7.1.2" data-path="machine-learning.html"><a href="machine-learning.html#interpreting-the-logistic-regression"><i class="fa fa-check"></i><b>7.1.2</b> Interpreting the logistic regression</a></li>
+<li class="chapter" data-level="7.1.3" data-path="machine-learning.html"><a href="machine-learning.html#measuring-the-performance-of-a-binary-classifier"><i class="fa fa-check"></i><b>7.1.3</b> Measuring the performance of a binary classifier</a></li>
+<li class="chapter" data-level="7.1.4" data-path="machine-learning.html"><a href="machine-learning.html#multiple-logistic-regression"><i class="fa fa-check"></i><b>7.1.4</b> Multiple logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="machine-learning.html"><a href="machine-learning.html#cross-validation"><i class="fa fa-check"></i><b>7.2</b> Cross-validation</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="machine-learning.html"><a href="machine-learning.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>7.2.1</b> k-Fold Cross-Validation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="machine-learning.html"><a href="machine-learning.html#tree-based-methods-for-classification"><i class="fa fa-check"></i><b>7.3</b> Tree-based methods for classification</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="machine-learning.html"><a href="machine-learning.html#classification-and-regression-trees-carts"><i class="fa fa-check"></i><b>7.3.1</b> Classification and regression trees (CARTs)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="machine-learning.html"><a href="machine-learning.html#tree-pruning"><i class="fa fa-check"></i><b>7.3.2</b> Tree pruning</a></li>
+<li class="chapter" data-level="7.3.3" data-path="machine-learning.html"><a href="machine-learning.html#random-forests"><i class="fa fa-check"></i><b>7.3.3</b> Random Forests</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>8</b> Optimization</a><ul>
+<li class="chapter" data-level="8.1" data-path="optimization.html"><a href="optimization.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
+<li class="chapter" data-level="8.2" data-path="optimization.html"><a href="optimization.html#fundamentals-of-optimization"><i class="fa fa-check"></i><b>8.2</b> Fundamentals of Optimization</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="optimization.html"><a href="optimization.html#fermats-theorem"><i class="fa fa-check"></i><b>8.2.1</b> Fermat’s Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="optimization.html"><a href="optimization.html#regression"><i class="fa fa-check"></i><b>8.3</b> Regression</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="optimization.html"><a href="optimization.html#linear-regression"><i class="fa fa-check"></i><b>8.3.1</b> Linear Regression</a></li>
+<li class="chapter" data-level="8.3.2" data-path="optimization.html"><a href="optimization.html#nonlinear-regression"><i class="fa fa-check"></i><b>8.3.2</b> Nonlinear Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="optimization.html"><a href="optimization.html#iterative-optimization-algorithms"><i class="fa fa-check"></i><b>8.4</b> Iterative Optimization Algorithms</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="optimization.html"><a href="optimization.html#gradient-descent"><i class="fa fa-check"></i><b>8.4.1</b> Gradient Descent</a></li>
+<li class="chapter" data-level="8.4.2" data-path="optimization.html"><a href="optimization.html#global-optimization"><i class="fa fa-check"></i><b>8.4.2</b> Global Optimization</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="optimization.html"><a href="optimization.html#calibration-of-dynamic-models"><i class="fa fa-check"></i><b>8.5</b> Calibration of Dynamic Models</a></li>
+<li class="chapter" data-level="8.6" data-path="optimization.html"><a href="optimization.html#uncertainty-analysis-and-bayesian-calibration"><i class="fa fa-check"></i><b>8.6</b> Uncertainty Analysis and Bayesian Calibration</a></li>
+<li class="chapter" data-level="8.7" data-path="optimization.html"><a href="optimization.html#references"><i class="fa fa-check"></i><b>8.7</b> References</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Quant Bio Modules</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ordination" class="section level1">
+<h1><span class="header-section-number">6</span> Ordination</h1>
+<p>While cluster analysis let’s us visualize multivariate data by grouping objects into dscrete categories, ordination uses continuous axes to help us accomplish the same task. While physicists grumble if space exceeds four dimensions, biologists typically grapple with dozens of dimensions (species and/or samples). In effect, we “order” this multivariate data in order to produce a low dimensional picture (i.e., a graph in 1-3 dimensions). Just like cluster analysis, we wil use similarity metrics to accomplish this. Also like cluster anlaysis, simple ordination is not a statistical test: it is a method of visualizing data.</p>
+<div class="figure"><span id="fig:dummy1"></span>
+<img src="_main_files/figure-html/dummy1-1.png" alt="" width="672" />
+<p class="caption">
+Figure 6.1: Synthetic axis rotation in ordination
+</p>
+</div>
+<div class="figure"><span id="fig:dummy2"></span>
+<img src="_main_files/figure-html/dummy2-1.png" alt="" width="672" />
+<p class="caption">
+Figure 6.2: Data reduction ordination
+</p>
+</div>
+<div id="ordination-as-data-reduction" class="section level2">
+<h2><span class="header-section-number">6.1</span> Ordination as data reduction</h2>
+<p>Essentially, we find axes in the data that explain a lot of variation, and rotate so we can use that axis as one of our dimensions of visual representation <a href="ordination.html#fig:dummy1">6.1</a>. Another way to think about it, is that we are going to summarize the raw data, which has many variables (p) byt a smaller set of derived (or synthetic or composite) variables, k <a href="ordination.html#fig:dummy2">6.2</a>. If the ordination is informative, it reduces a large number of original correlated variables to a small number of new uncorrelated variables. But it really is a bit of a balancing act between clarity of representation (and ease of understanding), and oversimiplication. We will lose information in this data reduction, and if that information is important, then we can make the multivariate data harder to understand! Also note that if the original variables are not correlated, then we won’t gain anything with ordinaton.</p>
+</div>
+<div id="methods-of-ordination" class="section level2">
+<h2><span class="header-section-number">6.2</span> Methods of Ordination</h2>
+<p>There are lots of different ways to perform an ordination, but most methods are based on extracting the eigenvalues of a similarity matrix. The four most commonly used methods are: <em>Principle Component Analysis (PCA)</em>, which is the main eigenvector-based method, <em>Correspondence Analysis (CA)</em> which is used used on frequency data, <em>Principle Coordinate Analysis (PCoA)</em> which works on dissimilarity matrices, and <em>Non Metric Multidimensional Scaling (NMDS)</em> which is NOT an eigenvector method, instead it represents objects along a predetermined number of axes.</p>
+<table>
+<caption>
+<span id="tab:tord">Table 6.1: </span>Domains of Application of Ordination Methods (adpated from Legnedre &amp; Lengendre 2012)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Method
+</th>
+<th style="text-align:left;">
+Distance
+</th>
+<th style="text-align:left;">
+Variables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Principal component analysis (PCA)
+</td>
+<td style="text-align:left;">
+Euclidean
+</td>
+<td style="text-align:left;">
+Quantitative data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Correspondence analysis (CA)
+</td>
+<td style="text-align:left;">
+X^2
+</td>
+<td style="text-align:left;">
+Non-negative, quantitiative or binary data; species frequencies or presence/absence data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Principal coordinate analysis (PCoA), metric (multidimensional) scaling, classical scaling
+</td>
+<td style="text-align:left;">
+Any
+</td>
+<td style="text-align:left;">
+Quantitative, semiquantitative, qualitative, or mixed
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Nonmetric multidimensional scaling (nMDS)
+</td>
+<td style="text-align:left;">
+Any
+</td>
+<td style="text-align:left;">
+Quantitative, semiquantitative, qualitative, or mixed
+</td>
+</tr>
+</tbody>
+</table>
+<p>Legendre &amp; Legendre (2012) provide a nice summary of when you should use each method <a href="ordination.html#tab:tord">6.1</a></p>
+</div>
+<div id="principal-components-analysis-pca" class="section level2">
+<h2><span class="header-section-number">6.3</span> Principal Components Analysis (PCA)</h2>
+<p>Principal Components Analusis is probably the most widely-used and well-known of the “standard” multivariate methods. It was invented by Pearson (1901) and Hotelling (1933), and first applied in ecology by Goodall (1954) under the name “factor analysis” (NB “principal factor analysis” is a synonym of PCA). Like most ordination methods, PCA takes a data matrix of n objects by p variables, which may be correlated, and summarizes it by uncorrelated axes (principal components or principal axes) that are linear combinations of the original p variables. The first k components display as much as possible of the variation among objects. PCA uses Euclidean distance calculated from the p variables as the measure of dissimilarity among the n objects, and derives the best possible k dimensional (k &lt; p) representation of the Euclidean distances among objects.</p>
+<div class="figure"><span id="fig:varord"></span>
+<img src="_main_files/figure-html/varord-1.png" alt="" width="672" />
+<p class="caption">
+Figure 6.3: Selecting the synthetic axes in ordination
+</p>
+</div>
+<p>We can think about this spatially. Objects are represented as a cloud of n points in a multidimensional space with an axis for each of the p variables. So the centroid of the points is defined by the mean of each variable, and
+the variance of each variable is the average squared deviation of its n values around the mean of that variable (i.e., <span class="math inline">\(V_i= \frac{1}{n-1}\sum_{m=1}^{n}{(X_{im}-\bar{X_i)}^2}\)</span>). The degree to which the variables are linearly correlcted is given by their covariances <span class="math inline">\(C_{ij}=\frac{1}{n-1}\sum_{m=1}^n{(X_{im}-\bar{X_i})(X_{jm}-\bar{X_j})}\)</span>. The objective of PCA is to rigidly rotate the axes of the p-dimenional space to new positions (principal axes) that have the following properties: they are ordered such that principal axis 1 has the highest variance, axis 2 has the next highest variance etc, and the covariance among each pair of principal axes is zero (the principal axes are uncorrelated) <a href="ordination.html#fig:varord">6.3</a></p>
+<p>Drafty below</p>
+<hr />
+<p>Let’s try an example. We’re going to use a sample dataset in R and the base R version of PCA to start exploring this data analysis technique. Get the iris dataset into memory by typing “data(“iris”). Take a look at this dataset using the head, str or summary functions. For a multivariate data set, you would like to take a look at the pairwise correlations. Remember that PCA can’t help us if the variables are not correlated. Let’s use the pairs() function to do this as: pairs(iris[1:4],main=“Iris Data”, pch=19, col=as.numeric(iris$Species)+1)</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2"><span class="kw">str</span>(iris); <span class="kw">summary</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a></code></pre></div>
+<pre><code>&#39;data.frame&#39;:   150 obs. of  5 variables:
+ $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+ $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+ $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+ $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+ $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre><code>  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+ Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+ 1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+ Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+ Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+ 3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+ Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  </code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">pairs</span>(iris[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>],<span class="dt">main=</span><span class="st">&quot;Iris Data&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">col=</span><span class="kw">as.numeric</span>(iris<span class="op">$</span>Species)<span class="op">+</span><span class="dv">1</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+The colours let us see the data for each species, the plots are the pairwise plotting of each pair of the 4 variables. Do you see any correlations?</p>
+<p>If there seem to be some correlations we might use PCA to visualize the 4 dimensional variable space. Let’s rush right in and use the prcomp() function to run a PCA on the numerical data in the iris dataframe. Save the output from the function to a new variable name so you can look at it when you type that name. The str() function will show you what the output object includes. If you use the summary() function, R will tell you what proportion of the total variance is explained by each axis. Do you notice anything?</p>
+<p>Hmmm, that’s a LOT of variance on axis one. Let’s examine the variance in the raw data. Use the apply() function to quickly calculate the variance in each of the numeric columns of the data as apply(iris[,1:3], 1, var). What do you see? Are the variances of each the columns comparable?</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">summary</span>(pca)</a></code></pre></div>
+<pre><code>Importance of components:
+                          PC1     PC2    PC3     PC4
+Standard deviation     2.0563 0.49262 0.2797 0.15439
+Proportion of Variance 0.9246 0.05307 0.0171 0.00521
+Cumulative Proportion  0.9246 0.97769 0.9948 1.00000</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">apply</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dv">2</span>, var)</a></code></pre></div>
+<pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+   0.6856935    0.1899794    3.1162779    0.5810063 </code></pre>
+<p>If you look at the help menu, the notes for the use of prcomp() STRONGLY recommend standardizing the data. To do this there is a built in option. We just need to set scale=TRUE. Let’s try again with data standardization. Save your new PCA output to a different name. We’ll compare to the unstandardized data in a moment. Take a look at the summary.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">pca2 &lt;-<span class="st"> </span><span class="kw">prcomp</span>(iris[,<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>], <span class="dt">scale=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb47-2" data-line-number="2"><span class="kw">summary</span>(pca2)</a></code></pre></div>
+<pre><code>Importance of components:
+                          PC1    PC2     PC3     PC4
+Standard deviation     1.7084 0.9560 0.38309 0.14393
+Proportion of Variance 0.7296 0.2285 0.03669 0.00518
+Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
+<p>That variance is now a bit more evenly distributed…
+Text about standardization here.</p>
+<p>Now we need to determine how many axes to use to interpret our analysis. For 4 variables its easy enough to just look that the amount of variance. For larger numbers of variables a plot can be useful. The screeplot() function will output the variance explained by each of the principle component axes, and you can make a decision based on that (e.g., screeplot(pca2, type=“lines”))</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<hr />
+<p>Hate this….</p>
+<p>How does this work exactly? The steps are
+1. Standardize the data
+2. Compute the variance-covariance matrix of the standardized data(same as correlation matrix for standardized data)
+3. Calculate the eigenvalues of the variance-covariance matrix
+4. Calculate the associated eigenvectors</p>
+<p>Then, the jth eigenvalue is the variance of the jth principle component and the sum of all the eigenvalues is the total variance explained. The proportion of variance explained by each component is the eigenvalue for the component divided by the total variance explained, while the loadings are the eigenvectors</p>
+<p>NB</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multivariate-distance-and-cluster-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
